@@ -19,7 +19,8 @@ class WhereMySubsApp:
         self.worker = None
 
         self.audio_path = tk.StringVar()
-        self.model_name = tk.StringVar(value="small")
+        # self.model_name = tk.StringVar(value="small")
+        self.model_name = tk.StringVar(value="medium")
         self.device = tk.StringVar(value="cpu")
         self.compute_type = tk.StringVar(value="int8")
         self.status = tk.StringVar(
@@ -74,7 +75,7 @@ class WhereMySubsApp:
             options,
             textvariable=self.model_name,
             state="readonly",
-            values=("tiny", "base", "small"),
+            values=("tiny", "base", "small", "medium"),
             width=12,
         ).grid(row=1, column=0, sticky="w", padx=(0, 20))
 

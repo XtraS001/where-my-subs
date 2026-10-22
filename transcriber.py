@@ -35,7 +35,8 @@ def get_output_path(audio_path: Path) -> Path:
 
 def transcribe_to_srt(
     audio_path: Path,
-    model_name: str = "small",
+    # model_name: str = "small",
+    model_name: str = "medium",
     device: str = "cpu",
     compute_type: str = "int8",
     progress_callback: Callable[[int], None] | None = None,
@@ -54,10 +55,22 @@ def transcribe_to_srt(
 
     # Transcription is lazy: segments are generated as we iterate.
     segments, info = model.transcribe(
-        str(audio_path),
-        beam_size=5,
-        vad_filter=True,
-    )
+    str(audio_path),
+    beam_size=5,
+    vad_filter=True,
+)
+#     segments, info = model.transcribe(
+#     str(audio_path),
+#     beam_size=5,
+#     vad_filter=True,
+#     vad_parameters={
+#         "threshold": 0.35,
+#         "min_speech_duration_ms": 0,
+#         "min_silence_duration_ms": 500,
+#         "speech_pad_ms": 500,
+#     },
+#     condition_on_previous_text=True,
+# )
 
     output_path = get_output_path(audio_path)
     count = 0
